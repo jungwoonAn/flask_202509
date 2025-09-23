@@ -12,7 +12,7 @@ bp = Blueprint('question', __name__, url_prefix='/question')
 def _list():
     page = request.args.get('page', default=1, type=int)  # 페이지
     question_list = Question.query.order_by(Question.create_date.desc())
-    question_list = question_list.pagenate(page=page, per_page=10)  # 한 페이지에 보여야할 게시글 수
+    question_list = question_list.paginate(page=page, per_page=10)  # 한 페이지에 보여야할 게시글 수
     return render_template('question/question_list.html', question_list=question_list)
 
 @bp.route('/detail/<int:question_id>')

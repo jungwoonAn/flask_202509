@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms.fields.simple import StringField, TextAreaField
-from wtforms.validators import DataRequired
+from wtforms.fields.simple import StringField, TextAreaField, PasswordField, EmailField
+from wtforms.validators import DataRequired, Length, EqualTo, Email
 
 
 class QuestionForm(FlaskForm):
@@ -9,3 +9,10 @@ class QuestionForm(FlaskForm):
 
 class AnswerForm(FlaskForm):
     content = TextAreaField('내용', validators=[DataRequired('내용은 필수입력 항목입니다.')])
+
+# 회원가입 폼 모듈 생성
+class UserCreateForm(FlaskForm):
+    username = StringField('사용자이름', validators=[DataRequired(), Length(min=3, max=25)])
+    password1 = PasswordField('비밀번호', validators=[DataRequired(), EqualTo('password2', message='비밀번호가 일치하지 않습니다.')])
+    password2 = PasswordField('비밀번호확인', validators=[DataRequired()])
+    email = EmailField('이메일', validators=[DataRequired(), Email()])
