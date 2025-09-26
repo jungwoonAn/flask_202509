@@ -10,6 +10,7 @@ class Question(db.Model):
                         nullable=False)
     user = db.relationship('User', backref=db.backref('question_set'))
     modify_date = db.Column(db.DateTime(), nullable=True)
+    image_path = db.Column(db.String(200), nullable=True)
 
 # 답변 모델 생성
 class Answer(db.Model):
